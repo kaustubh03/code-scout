@@ -1,0 +1,44 @@
+{
+  "name": "ai-assist",
+  "displayName": "AI Assist by Central FE",
+  "version": "0.0.1",
+  "description": "A VSCode extension that that scans for bad code",
+  "main": "extension.js",
+  "icon": "images/logo.png",
+  "publisher": "kaustubhsaxena",
+  "engines": {
+    "vscode": "^1.80.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaustubh03/cognitive-complexity-vscode-extension.git"
+  },
+  "keywords": [
+    "vscode",
+    "extension"
+  ],
+  "author": "Kaustubh Saxena",
+  "license": "GPL-3.0-only",
+  "bugs": {
+    "url": "https://github.com/kaustubh03/cognitive-complexity-vscode-extension/issues"
+  },
+  "homepage": "https://github.com/kaustubh03/cognitive-complexity-vscode-extension#readme",
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
+  "devDependencies": {
+    "vscode": "^1.1.37"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "marked": "^12.0.2"
+  },
+  "files": [
+    "out/**/*",
+    "ollama-worker.js"
+  ]
+}
