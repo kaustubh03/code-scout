@@ -1,10 +1,10 @@
 {
-  "name": "ai-assist",
-  "displayName": "AI Assist by Central FE",
+  "name": "codescout",
+  "displayName": "Code Scout - AI Assist Locally",
   "version": "0.0.1",
-  "description": "A VSCode extension that that scans for bad code",
+  "description": "A VSCode extension that that scans for bad code, suggests improvements using Artificial Intelligence",
   "main": "extension.js",
-  "icon": "images/logo.png",
+  "icon": "images/logo.jpg",
   "publisher": "kaustubhsaxena",
   "engines": {
     "vscode": "^1.80.1"
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaustubh03/cognitive-complexity-vscode-extension.git"
+    "url": "git+https://github.com/kaustubh03/code-scout.git"
   },
   "keywords": [
     "vscode",
@@ -23,12 +23,19 @@
   "author": "Kaustubh Saxena",
   "license": "GPL-3.0-only",
   "bugs": {
-    "url": "https://github.com/kaustubh03/cognitive-complexity-vscode-extension/issues"
+    "url": "https://github.com/kaustubh03/code-scout/issues"
   },
-  "homepage": "https://github.com/kaustubh03/cognitive-complexity-vscode-extension#readme",
+  "homepage": "https://github.com/kaustubh03/code-scout#readme",
   "activationEvents": [
     "onLanguage:javascript",
-    "onLanguage:typescript"
+    "onLanguage:typescript",
+    "onLanguage:python",
+    "onLanguage:ruby",
+    "onLanguage:java",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact",
+    "onLanguage:scss",
+    "onLanguage:css"
   ],
   "devDependencies": {
     "vscode": "^1.1.37"
@@ -38,7 +45,6 @@
     "marked": "^12.0.2"
   },
   "files": [
-    "out/**/*",
-    "ollama-worker.js"
+    "out/**/*"
   ]
 }

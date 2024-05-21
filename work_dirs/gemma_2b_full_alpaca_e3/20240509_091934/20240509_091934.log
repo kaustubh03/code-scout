@@ -1,0 +1,197 @@
+2024/05/09 09:19:39 - mmengine - INFO - 
+------------------------------------------------------------
+System environment:
+    sys.platform: darwin
+    Python: 3.9.6 (default, Nov 10 2023, 13:38:27) [Clang 15.0.0 (clang-1500.1.0.2.5)]
+    CUDA available: False
+    MUSA available: False
+    numpy_random_seed: 130811964
+    GCC: Apple clang version 15.0.0 (clang-1500.1.0.2.5)
+    PyTorch: 2.2.0
+    PyTorch compiling details: PyTorch built with:
+  - GCC 4.2
+  - C++ Version: 201703
+  - clang 14.0.3
+  - OpenMP 201811
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: NO AVX
+  - Build settings: BLAS_INFO=accelerate, BUILD_TYPE=Release, CXX_COMPILER=/Applications/Xcode_14.3.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DUSE_PYTORCH_METAL_EXPORT -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -DUSE_COREML_DELEGATE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=braced-scalar-init -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wvla-extension -Wsuggest-override -Wnewline-eof -Winconsistent-missing-override -Winconsistent-missing-destructor-override -Wno-pass-failed -Wno-error=pedantic -Wno-error=old-style-cast -Wno-error=inconsistent-missing-override -Wno-error=inconsistent-missing-destructor-override -Wconstant-conversion -Wno-invalid-partial-specialization -Wno-missing-braces -Qunused-arguments -fcolor-diagnostics -faligned-new -Wno-unused-but-set-variable -fno-math-errno -fno-trapping-math -Werror=format -DUSE_MPS -Wno-unused-private-field -Wno-missing-braces, LAPACK_INFO=accelerate, TORCH_VERSION=2.2.0, USE_CUDA=OFF, USE_CUDNN=OFF, USE_EIGEN_FOR_BLAS=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=OFF, USE_MKLDNN=OFF, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, 
+
+    TorchVision: 0.17.0
+    OpenCV: 4.9.0
+    MMEngine: 0.10.4
+
+Runtime environment:
+    cudnn_benchmark: False
+    mp_cfg: {'mp_start_method': 'fork', 'opencv_num_threads': 0}
+    dist_cfg: {'backend': 'nccl'}
+    seed: 130811964
+    deterministic: False
+    Distributed launcher: none
+    Distributed training: False
+    GPU number: 1
+------------------------------------------------------------
+
+2024/05/09 09:19:39 - mmengine - INFO - Config:
+SYSTEM = 'xtuner.utils.SYSTEM_TEMPLATE.alpaca'
+accumulative_counts = 16
+alpaca_en = dict(
+    dataset=dict(path='tatsu-lab/alpaca', type='datasets.load_dataset'),
+    dataset_map_fn='xtuner.dataset.map_fns.alpaca_map_fn',
+    max_length=2048,
+    pack_to_max_length=True,
+    remove_unused_columns=True,
+    shuffle_before_pack=True,
+    template_map_fn=dict(
+        template='xtuner.utils.PROMPT_TEMPLATE.default',
+        type='xtuner.dataset.map_fns.template_map_fn_factory'),
+    tokenizer=dict(
+        padding_side='right',
+        pretrained_model_name_or_path='google/gemma-2b',
+        trust_remote_code=True,
+        type='transformers.AutoTokenizer.from_pretrained'),
+    type='xtuner.dataset.process_hf_dataset',
+    use_varlen_attn=False)
+alpaca_en_path = 'tatsu-lab/alpaca'
+batch_size = 1
+betas = (
+    0.9,
+    0.999,
+)
+custom_hooks = [
+    dict(
+        tokenizer=dict(
+            padding_side='right',
+            pretrained_model_name_or_path='google/gemma-2b',
+            trust_remote_code=True,
+            type='transformers.AutoTokenizer.from_pretrained'),
+        type='xtuner.engine.hooks.DatasetInfoHook'),
+    dict(
+        evaluation_inputs=[
+            '请给我介绍五个上海的景点',
+            'Please tell me five scenic spots in Shanghai',
+        ],
+        every_n_iters=500,
+        prompt_template='xtuner.utils.PROMPT_TEMPLATE.default',
+        system='xtuner.utils.SYSTEM_TEMPLATE.alpaca',
+        tokenizer=dict(
+            padding_side='right',
+            pretrained_model_name_or_path='google/gemma-2b',
+            trust_remote_code=True,
+            type='transformers.AutoTokenizer.from_pretrained'),
+        type='xtuner.engine.hooks.EvaluateChatHook'),
+]
+dataloader_num_workers = 0
+default_hooks = dict(
+    checkpoint=dict(
+        by_epoch=False,
+        interval=500,
+        max_keep_ckpts=2,
+        type='mmengine.hooks.CheckpointHook'),
+    logger=dict(
+        interval=10,
+        log_metric_by_epoch=False,
+        type='mmengine.hooks.LoggerHook'),
+    param_scheduler=dict(type='mmengine.hooks.ParamSchedulerHook'),
+    sampler_seed=dict(type='mmengine.hooks.DistSamplerSeedHook'),
+    timer=dict(type='mmengine.hooks.IterTimerHook'))
+env_cfg = dict(
+    cudnn_benchmark=False,
+    dist_cfg=dict(backend='nccl'),
+    mp_cfg=dict(mp_start_method='fork', opencv_num_threads=0))
+evaluation_freq = 500
+evaluation_inputs = [
+    '请给我介绍五个上海的景点',
+    'Please tell me five scenic spots in Shanghai',
+]
+launcher = 'none'
+load_from = None
+log_level = 'INFO'
+log_processor = dict(by_epoch=False)
+lr = 2e-05
+max_epochs = 3
+max_length = 2048
+max_norm = 1
+model = dict(
+    llm=dict(
+        pretrained_model_name_or_path='google/gemma-2b',
+        trust_remote_code=True,
+        type='transformers.AutoModelForCausalLM.from_pretrained'),
+    type='xtuner.model.SupervisedFinetune',
+    use_varlen_attn=False)
+optim_type = 'torch.optim.AdamW'
+optim_wrapper = dict(
+    accumulative_counts=16,
+    clip_grad=dict(error_if_nonfinite=False, max_norm=1),
+    dtype='float16',
+    loss_scale='dynamic',
+    optimizer=dict(
+        betas=(
+            0.9,
+            0.999,
+        ),
+        lr=2e-05,
+        type='torch.optim.AdamW',
+        weight_decay=0),
+    type='mmengine.optim.AmpOptimWrapper')
+pack_to_max_length = True
+param_scheduler = [
+    dict(
+        begin=0,
+        by_epoch=True,
+        convert_to_iter_based=True,
+        end=0.09,
+        start_factor=1e-05,
+        type='mmengine.optim.LinearLR'),
+    dict(
+        begin=0.09,
+        by_epoch=True,
+        convert_to_iter_based=True,
+        end=3,
+        eta_min=0.0,
+        type='mmengine.optim.CosineAnnealingLR'),
+]
+pretrained_model_name_or_path = 'google/gemma-2b'
+prompt_template = 'xtuner.utils.PROMPT_TEMPLATE.default'
+randomness = dict(deterministic=False, seed=None)
+resume = False
+save_steps = 500
+save_total_limit = 2
+tokenizer = dict(
+    padding_side='right',
+    pretrained_model_name_or_path='google/gemma-2b',
+    trust_remote_code=True,
+    type='transformers.AutoTokenizer.from_pretrained')
+train_cfg = dict(max_epochs=3, type='xtuner.engine.runner.TrainLoop')
+train_dataloader = dict(
+    batch_size=1,
+    collate_fn=dict(
+        type='xtuner.dataset.collate_fns.default_collate_fn',
+        use_varlen_attn=False),
+    dataset=dict(
+        dataset=dict(path='tatsu-lab/alpaca', type='datasets.load_dataset'),
+        dataset_map_fn='xtuner.dataset.map_fns.alpaca_map_fn',
+        max_length=2048,
+        pack_to_max_length=True,
+        remove_unused_columns=True,
+        shuffle_before_pack=True,
+        template_map_fn=dict(
+            template='xtuner.utils.PROMPT_TEMPLATE.default',
+            type='xtuner.dataset.map_fns.template_map_fn_factory'),
+        tokenizer=dict(
+            padding_side='right',
+            pretrained_model_name_or_path='google/gemma-2b',
+            trust_remote_code=True,
+            type='transformers.AutoTokenizer.from_pretrained'),
+        type='xtuner.dataset.process_hf_dataset',
+        use_varlen_attn=False),
+    num_workers=0,
+    sampler=dict(shuffle=True, type='mmengine.dataset.DefaultSampler'))
+use_varlen_attn = False
+visualizer = None
+warmup_ratio = 0.03
+weight_decay = 0
+work_dir = './work_dirs/gemma_2b_full_alpaca_e3'
+
+2024/05/09 09:19:40 - mmengine - WARNING - Failed to search registry with scope "mmengine" in the "builder" registry tree. As a workaround, the current "builder" registry in "xtuner" is used to build instance. This may cause unexpected failure when running the built modules. Please check whether "mmengine" is a correct scope, or whether the registry is initialized.
