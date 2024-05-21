@@ -2,7 +2,7 @@
   "name": "codescout",
   "displayName": "Code Scout - AI Assist Locally",
   "version": "0.0.1",
-  "description": "A VSCode extension that that scans for bad code, suggests improvements using Artificial Intelligence",
+  "description": "A VSCode extension that runs locally and scans for bad code, suggests improvements using Artificial Intelligence",
   "main": "extension.js",
   "icon": "images/logo.jpg",
   "publisher": "kaustubhsaxena",

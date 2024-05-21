@@ -1,9 +1,45 @@
 const vscode = require('vscode');
+const fs = require('fs');
+const https = require('https');
+const path = require('path');
 const axios = require('axios');
 const marked = require('marked');
 const ollama_api_endpoint = 'http://localhost:11434/api/generate';
 
+
 let responsePanel;
+
+async function downloadFile(url, filename) {
+  try {
+    const downloadDir = vscode.Uri.file(path.join(vscode.workspace.rootPath || '', 'downloads'));
+    const downloadPath = vscode.Uri.joinPath(downloadDir, filename);
+
+    await new Promise((resolve, reject) => {
+      const fileStream = fs.createWriteStream(downloadPath.fsPath);
+
+      https.get(url, (response) => {
+        response.pipe(fileStream);
+
+        fileStream.on('finish', () => {
+          fileStream.close();
+          resolve();
+        });
+
+        fileStream.on('error', (err) => {
+          fs.unlink(downloadPath.fsPath); // Delete the file if there was an error
+          reject(err);
+        });
+      }).on('error', (err) => {
+        fs.unlink(downloadPath.fsPath); // Delete the file if there was an error
+        reject(err);
+      });
+    });
+
+    vscode.window.showInformationMessage(`File downloaded: ${downloadPath.fsPath}`);
+  } catch (error) {
+    vscode.window.showErrorMessage(`Error downloading file: ${error.message}`);
+  }
+}
 
 function refineData(response, result, done) {
   response.data.split("\n").map(objString => {
@@ -52,8 +88,23 @@ async function callInferenceEndpointAndUpdate(context, document, code) {
           storeAndShowWebPanel(context, document, code, diagnostics);
 
         } catch (error) {
-          console.log(error);
-          vscode.window.showErrorMessage(`Error: ${error.message}`);
+           if (error.message.includes('connect ECONNREFUSED')) {
+            const dialogResult = await vscode.window.showInformationMessage(
+              'First Time using? Ollama and other dependencies are not installed or running. Please install them before using CodeScout.',
+              { modal: true },
+              'Install'
+            );
+
+            if (dialogResult === 'Install Ollama') {
+              const url = '';
+              const filename = 'installer.js';
+              downloadFile(url, filename);
+            }
+            return;
+          } else {
+            vscode.window.showErrorMessage(`Error: ${error.message}`);
+            return;
+          }
         }
         finally {
           // Hide the loader in the status bar
