@@ -1,5 +1,5 @@
 # CodeScout
-CodeScout is a powerful Visual Studio Code (VSCode) extension that harnesses the capabilities of a locally hosted language model, Gemma:2b, running on Ollama. This extension provides real-time code analysis and suggestions, enabling developers to write more efficient and maintainable code without compromising data privacy or security.
+CodeScout is an powerful experimental Visual Studio Code (VSCode) extension that harnesses the capabilities of a locally hosted language model, Gemma:2b, running on Ollama. This extension provides real-time code analysis and suggestions, enabling developers to write more efficient and maintainable code without compromising data privacy or security.
 Features
 
 Real-time Code Analysis: CodeScout analyzes your code on-the-fly as you type, providing insights and suggestions for improvements.
@@ -12,7 +12,15 @@ Multi-Language Support: CodeScout supports analysis for multiple programming lan
 Follow these steps to set up and use CodeScout in your development environment:
 
 Install the Extension: Search for "CodeScout" in the VSCode Extensions Marketplace and install it.
-Configure CodeScout: Open the CodeScout settings in VSCode and provide the necessary configuration details, such as the Ollama server URL and any additional analysis settings.
+Click Install when prompted to install dependencies.
+
+### Follow Below Steps to install dependencies using installer
+- Download file from [here](https://raw.githubusercontent.com/kaustubh03/code-scout/main/installer.js) using Save Link As.
+- Run the download file using node on your terminal
+    ```
+        node installer.js
+    ```
+
 Start Coding: As you write code in VSCode, CodeScout will automatically analyze it and display suggestions and insights in the dedicated WebView panel.
 
 ### Contributing

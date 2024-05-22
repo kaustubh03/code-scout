@@ -96,9 +96,8 @@ async function callInferenceEndpointAndUpdate(context, document, code) {
             );
 
             if (dialogResult === 'Install Ollama') {
-              const url = '';
-              const filename = 'installer.js';
-              downloadFile(url, filename);
+              // Open the Ollama installation instructions URL
+              vscode.env.openExternal(vscode.Uri.parse('https://ollama.com/install'));
             }
             return;
           } else {
