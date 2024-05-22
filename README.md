@@ -23,6 +23,11 @@ Click Install when prompted to install dependencies.
 
 Start Coding: As you write code in VSCode, CodeScout will automatically analyze it and display suggestions and insights in the dedicated WebView panel.
 
+If you have Ollama already installed, Pull Gemma:2b model from terminal with below command.
+```
+    ollama pull gemma:2b
+```
+
 ### Contributing
 We welcome contributions from the community to enhance CodeScout's capabilities and improve its overall experience. If you'd like to contribute, please follow these steps:
 

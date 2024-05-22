@@ -94,10 +94,9 @@ async function callInferenceEndpointAndUpdate(context, document, code) {
               { modal: true },
               'Install'
             );
-
-            if (dialogResult === 'Install Ollama') {
-              // Open the Ollama installation instructions URL
-              vscode.env.openExternal(vscode.Uri.parse('https://ollama.com/install'));
+            
+            if (dialogResult === 'Install') {
+              vscode.env.openExternal('https://github.com/kaustubh03/code-scout?tab=readme-ov-file#follow-below-steps-to-install-dependencies-using-installer');
             }
             return;
           } else {
