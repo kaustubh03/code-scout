@@ -28,6 +28,10 @@ If you have Ollama already installed, Pull Gemma:2b model from terminal with bel
     ollama pull gemma:2b
 ```
 
+### Screenshots
+<img width="1170" alt="image" src="https://github.com/kaustubh03/code-scout/assets/26454429/7c8c3b67-9f4f-4f0e-8063-43123241464e">
+
+
 ### Contributing
 We welcome contributions from the community to enhance CodeScout's capabilities and improve its overall experience. If you'd like to contribute, please follow these steps:
 
