@@ -1,5 +1,6 @@
 # CodeScout
-CodeScout is an powerful experimental Visual Studio Code (VSCode) extension that harnesses the capabilities of a locally hosted language model, Gemma:2b, running on Ollama. This extension provides real-time code analysis and suggestions, enabling developers to write more efficient and maintainable code without compromising data privacy or security.
+CodeScout is an powerful experimental Visual Studio Code (VSCode) extension that harnesses the capabilities of a locally hosted language model, Gemma:2b, running on Ollama. This extension provides real-time code analysis and suggestions, enabling developers to write more efficient and maintainable code without compromising data privacy or security. The aim is to provide local AI assistance on a not sophisticated hardware.
+
 Features
 
 Real-time Code Analysis: CodeScout analyzes your code on-the-fly as you type, providing insights and suggestions for improvements.
